@@ -7,28 +7,31 @@ GAME RULES:
 - The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. After that, it's the next player's turn
 - The first player to reach 100 points on GLOBAL score wins the game
 
+- Modified: A player losses his entire score when he rolles two sizes in a roll
+
 */
 
-var scores, roundScore, activePlayer, gamePlaying;
+var scores, roundScore, activePlayer, gamePlaying, prevDice;
 var diceDOM = document.querySelector('.dice');
 
 
 var init = function(){
     gamePlaying = true;
     scores = [0, 0];
-roundScore = 0;
-activePlayer = 0;
+    roundScore = 0;
+    activePlayer = 0;
+    prevDice = 0;
 
 //reset player 1 values
-document.getElementById('score-0').textContent = 0;
-document.getElementById('current-0').textContent = 0;
+    document.getElementById('score-0').textContent = 0;
+    document.getElementById('current-0').textContent = 0;
 
 //reset player 2 values
-document.getElementById('score-1').textContent = 0;
-document.getElementById('current-1').textContent = 0;
+    document.getElementById('score-1').textContent = 0;
+    document.getElementById('current-1').textContent = 0;
 
 //reset dice image
-diceDOM.style.display = 'none';
+    diceDOM.style.display = 'none';
 
 }
 
@@ -51,6 +54,7 @@ var togglePlayer = function (){
     document.querySelector('.player-1-panel').classList.toggle('active');
 
     roundScore = 0;
+    prevDice = 0;
 
 }
 
@@ -72,8 +76,13 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
         diceDOM.style.display = 'block';
     }
 
-    if(dice !== 1){
+    if(dice === 6 && prevDice === 6){
+        scores[activePlayer] = 0;
+        togglePlayer();
+
+    } else if(dice !== 1){
         //add to total score
+        prevDice = dice;
         roundScore += dice;
         document.querySelector('#current-' + activePlayer).textContent = roundScore;
     }else{
