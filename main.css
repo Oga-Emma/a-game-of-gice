@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.background{
+    background-color: lightcoral;
+    width: 100%;
+    height: 100vh;
+}
+
+.center{
+    background-color: goldenrod;
+    width: 70%;
+    height: 80vh;
+    margin: auto auto;
+}
+
+.player-1{
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    float: right;
+
+}
+
+.player-2{
+    width: 50%;
+    height: 100%;
+    background-color: white;
+
+}
+
+.player-1.turn{
+    background-color: lightgray;
+}
+
+
+.player-2.turn{
+    background-color: lightgray;
+}
